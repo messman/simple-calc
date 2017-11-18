@@ -4,7 +4,8 @@ import * as Keys from "./keys.js";
 export const ui = {
 	keys: "#calc-keys",
 	displayInput: "#calc-display-input",
-	display: "#calc-display"
+	display: "#calc-display",
+	output: "#calc-output",
 };
 
 // Add custom keypress listeners
@@ -139,4 +140,11 @@ export function updateDisplay(key) {
 
 	displayInput.focus();
 	setCursorPosition(displayInput, index + 1);
+}
+
+export function updateOutput(result) {
+	const output = document.querySelector(ui.output);
+	if (result === null)
+		output.innerHTML = "";
+	output.innerHTML = result;
 }

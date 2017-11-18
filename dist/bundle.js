@@ -635,7 +635,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 400px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 340px;\n\t}\n}", ""]);
+exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 400px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 320px;\n\t}\n}", ""]);
 
 // exports
 
@@ -775,7 +775,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tmargin: .5em 0;\n\tpadding: 0 .5em;\n\ttext-align: center;\n}", ""]);
 
 // exports
 
@@ -842,7 +842,14 @@ var Draw = _interopRequireWildcard(_draw);
 
 var _keys = __webpack_require__(2);
 
+var _calculate = __webpack_require__(14);
+
+var Calculator = _interopRequireWildcard(_calculate);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// Calcualtor's current expression
+var input = [];
 
 // Entry point to application
 document.addEventListener("DOMContentLoaded", function () {
@@ -858,10 +865,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		switch (key.type) {
 			case _keys.KEY_TYPE.clear:
 				UI.updateDisplay(null);
+				input = [];
 				break;
 			default:
 				// Add the key to the display
 				UI.updateDisplay(key);
+				input.push(key);
+				UI.updateOutput(Calculator.calc(input));
 				break;
 		}
 	});
@@ -880,6 +890,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.onKeyPressed = exports.ui = undefined;
 exports.bindUIOnReady = bindUIOnReady;
 exports.updateDisplay = updateDisplay;
+exports.updateOutput = updateOutput;
 
 var _keys = __webpack_require__(2);
 
@@ -891,7 +902,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var ui = exports.ui = {
 	keys: "#calc-keys",
 	displayInput: "#calc-display-input",
-	display: "#calc-display"
+	display: "#calc-display",
+	output: "#calc-output"
 };
 
 // Add custom keypress listeners
@@ -1017,6 +1029,12 @@ function updateDisplay(key) {
 
 	displayInput.focus();
 	setCursorPosition(displayInput, index + 1);
+}
+
+function updateOutput(result) {
+	var output = document.querySelector(ui.output);
+	if (result === null) output.innerHTML = "";
+	output.innerHTML = result;
 }
 
 /***/ }),
@@ -1210,6 +1228,23 @@ function drawSingle(ctx, keyEntry, index, length, middle, newKeyAnimationPercent
 	ctx.textBaseline = "middle";
 	ctx.fillText(value, 0, -ringRadius / 2);
 	ctx.restore();
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.calc = calc;
+function calc(input) {
+	return eval(input.map(function (a) {
+		return a.value;
+	}).join("")).toFixed(4);
 }
 
 /***/ })
