@@ -8,7 +8,14 @@ module.exports = {
 		filename: "bundle.js"
 	},
 	module: {
-		loaders: [
+		rules: [
+			{
+				test: /\.css$/,
+				loaders: [
+					"style-loader", // Create styles from JS strings
+					"css-loader", // Translates CSS into JS
+				]
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
