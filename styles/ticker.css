@@ -1,0 +1,15 @@
+.ticker {
+	width: 90%;
+	margin: auto;
+	background-color: #fff;
+	border: 0;
+	border-top: none;
+	box-shadow: 1px 1px 3px 1px #333;
+}
+
+.ticker .ticker-output {
+	border: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}

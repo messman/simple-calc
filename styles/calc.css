@@ -1,0 +1,69 @@
+/* The overall calculator body */
+.calc {
+	width: 100%;
+	border-radius: 3px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border: 1px solid #333;
+	box-shadow: 1px 1px 5px 0 #333;
+	background-color: transparent;
+}
+
+.calc-display {
+	height: 2em;
+	font-size: 2em;
+	line-height: 2em;
+	padding: 0 .5em;
+	color: white;
+	background-color: #333;
+	font-family: "Courier New", "Courier", monospace;
+	text-decoration: underline;
+    text-decoration-color: rgba(256, 256, 256, .3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calc-keys {
+	width: 100%;
+	border-collapse: collapse;
+	border: none;
+	table-layout: fixed;
+}
+
+.calc-keys tr {
+	border: none;
+}
+
+.calc-keys td {
+	padding: 2px;
+	border: 1px solid #333;
+	background-color: #f9f9f9;
+}
+
+.calc-keys td button {
+	display: table-cell;
+	width: 100%;
+	height: 100%;
+
+	color:#333;
+
+	font-size: 1.5em;
+
+	border: 0;
+	border-radius: 0;
+	padding: 10px;
+	
+	cursor: pointer;
+	background-color: transparent;
+	user-select: none;
+	-webkit-user-select: none;
+	font-weight: bold;
+}
+
+.calc-keys td:hover {
+	background-color: #eee;
+}
+
+.calc-keys td:active {
+	background-color: #ddd;
+}
