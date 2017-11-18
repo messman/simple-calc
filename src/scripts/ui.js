@@ -122,13 +122,13 @@ export function updateDisplay(key) {
 	const numChildren = display.children.length;
 	let index = getCursorPosition(displayInput);
 	if (index === -1)
-		index = numChildren - 1;
-	const isLast = index === numChildren - 1;
+		index = numChildren;
 
-	if (isLast)
+	if (index === numChildren)
 		display.appendChild(span);
 	else
 		display.insertBefore(span, display.children[index]);
+
 
 	let text = displayInput.value;
 	const before = text.substring(0, index);
