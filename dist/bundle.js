@@ -635,7 +635,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 380px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}", ""]);
+exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 400px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 340px;\n\t}\n}", ""]);
 
 // exports
 
@@ -852,16 +852,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	Draw.bindCanvas();
 
-	UI.onKeyPressed.push(function (key, position) {
+	UI.onKeyPressed.push(function (key) {
+		Draw.update(key);
+
 		switch (key.type) {
 			case _keys.KEY_TYPE.clear:
 				UI.updateDisplay(null);
-				Draw.clear();
 				break;
 			default:
 				// Add the key to the display
 				UI.updateDisplay(key);
-				Draw.update(key, position);
 				break;
 		}
 	});
@@ -927,7 +927,7 @@ function bindUIOnReady() {
 			if (key.size !== 1) td.colSpan = key.size;
 
 			// When clicked, trigger
-			button.onclick = function (e) {
+			td.onclick = function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
 				keyPress(key);
@@ -1031,7 +1031,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.bindCanvas = bindCanvas;
 exports.update = update;
-exports.clear = clear;
 // All the keys we will need to draw in the canvas.
 var keysToDraw = [];
 // Keep track of total keys, as we will clear the array above
@@ -1074,12 +1073,6 @@ function update(newKey) {
 		random: Math.random()
 	});
 
-	if (!isDrawing) animate();
-}
-
-// Clear everything
-function clear() {
-	keysToDraw = [];
 	if (!isDrawing) animate();
 }
 

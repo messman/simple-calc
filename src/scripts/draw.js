@@ -44,13 +44,6 @@ export function update(newKey) {
 		animate();
 }
 
-// Clear everything
-export function clear() {
-	keysToDraw = [];
-	if (!isDrawing)
-		animate();
-}
-
 // The animation loop
 function animate() {
 	isDrawing = true;

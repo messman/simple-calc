@@ -42,7 +42,7 @@ export function bindUIOnReady() {
 				td.colSpan = key.size;
 
 			// When clicked, trigger
-			button.onclick = function (e) {
+			td.onclick = function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
 				keyPress(key);

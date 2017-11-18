@@ -28,7 +28,7 @@ main {
 }
 
 .calc-container {
-	width: 380px;
+	width: 400px;
 }
 
 .background {
@@ -45,4 +45,14 @@ main {
 	background-color: #ececec;
 	padding: 0 1em;
 	margin: .5em;
+}
+
+@media screen and (max-width: 500px), screen and (max-height: 600px) {
+	header {
+		display: none;
+	}		
+	
+	.calc-container {
+		width: 340px;
+	}
 }

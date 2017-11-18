@@ -10,16 +10,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	Draw.bindCanvas();
 
-	UI.onKeyPressed.push(function (key, position) {
+	UI.onKeyPressed.push(function (key) {
+		Draw.update(key);
+
 		switch (key.type) {
 			case KEY_TYPE.clear:
 				UI.updateDisplay(null);
-				Draw.clear();
 				break;
 			default:
 				// Add the key to the display
 				UI.updateDisplay(key);
-				Draw.update(key, position);
 				break;
 		}
 	});
