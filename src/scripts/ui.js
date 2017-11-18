@@ -3,6 +3,7 @@ import * as Keys from "./keys.js";
 // UI bindings
 export const ui = {
 	keys: "#calc-keys",
+	displayInput: "#calc-display-input",
 	display: "#calc-display"
 };
 
@@ -57,8 +58,8 @@ export function bindUIOnReady() {
 		table.appendChild(tr);
 	});
 
-	const display = document.querySelector(ui.display);
-	display.addEventListener("keypress", function (e) {
+	const displayInput = document.querySelector(ui.displayInput);
+	displayInput.addEventListener("keypress", function (e) {
 		const keyPressed = flat[e.key.toLowerCase()];
 		if (keyPressed) {
 			keyPress(keyPressed);
@@ -68,12 +69,49 @@ export function bindUIOnReady() {
 	});
 }
 
+function getCursorPosition(el) {
+	if ("selectionStart" in el) {
+		// Standard-compliant browsers
+		return el.selectionStart;
+	}
+	else if (document.selection) {
+		// IE
+		el.focus();
+		const selection = document.selection.createRange();
+		const selectionLength = document.selection.createRange().text.length;
+		selection.moveStart("character", -el.value.length);
+		return selection.text.length - selectionLength;
+	}
+	return -1;
+}
+
+function setSelectionRange(input, selectionStart, selectionEnd) {
+	if (input.setSelectionRange) {
+		input.focus();
+		input.setSelectionRange(selectionStart, selectionEnd);
+	}
+	else if (input.createTextRange) {
+		// IE
+		var range = input.createTextRange();
+		range.collapse(true);
+		range.moveEnd("character", selectionEnd);
+		range.moveStart("character", selectionStart);
+		range.select();
+	}
+}
+
+function setCursorPosition(input, pos) {
+	setSelectionRange(input, pos, pos);
+}
+
 // Update the display
 export function updateDisplay(key) {
 	const display = document.querySelector(ui.display);
+	const displayInput = document.querySelector(ui.displayInput);
 
 	if (!key) {
 		display.innerHTML = "";
+		displayInput.value = "";
 		return;
 	}
 
@@ -82,12 +120,23 @@ export function updateDisplay(key) {
 	span.style.color = key.colors.display;
 
 	const numChildren = display.children.length;
-	const index = -1;
-	if (index === -1 || index > numChildren - 1) {
+	let index = getCursorPosition(displayInput);
+	if (index === -1)
+		index = numChildren - 1;
+	const isLast = index === numChildren - 1;
+
+	if (isLast)
 		display.appendChild(span);
-	}
-	else {
+	else
 		display.insertBefore(span, display.children[index]);
-	}
-	display.focus();
+
+	let text = displayInput.value;
+	const before = text.substring(0, index);
+	const after = text.substring(index);
+	const newVal = before + " " + after;
+	displayInput.value = newVal;
+	console.log(text.length, before.length, after.length, newVal.length)
+
+	displayInput.focus();
+	setCursorPosition(displayInput, index + 1);
 }

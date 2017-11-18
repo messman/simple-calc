@@ -775,7 +775,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display {\n\tdisplay: block;\n\tborder: 0;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground-color: #333;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\ttext-decoration: underline;\n    text-decoration-color: rgba(256, 256, 256, .3);\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}", ""]);
 
 // exports
 
@@ -890,6 +890,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // UI bindings
 var ui = exports.ui = {
 	keys: "#calc-keys",
+	displayInput: "#calc-display-input",
 	display: "#calc-display"
 };
 
@@ -942,8 +943,8 @@ function bindUIOnReady() {
 		table.appendChild(tr);
 	});
 
-	var display = document.querySelector(ui.display);
-	display.addEventListener("keypress", function (e) {
+	var displayInput = document.querySelector(ui.displayInput);
+	displayInput.addEventListener("keypress", function (e) {
 		var keyPressed = flat[e.key.toLowerCase()];
 		if (keyPressed) {
 			keyPress(keyPressed);
@@ -953,12 +954,47 @@ function bindUIOnReady() {
 	});
 }
 
+function getCursorPosition(el) {
+	if ("selectionStart" in el) {
+		// Standard-compliant browsers
+		return el.selectionStart;
+	} else if (document.selection) {
+		// IE
+		el.focus();
+		var selection = document.selection.createRange();
+		var selectionLength = document.selection.createRange().text.length;
+		selection.moveStart("character", -el.value.length);
+		return selection.text.length - selectionLength;
+	}
+	return -1;
+}
+
+function setSelectionRange(input, selectionStart, selectionEnd) {
+	if (input.setSelectionRange) {
+		input.focus();
+		input.setSelectionRange(selectionStart, selectionEnd);
+	} else if (input.createTextRange) {
+		// IE
+		var range = input.createTextRange();
+		range.collapse(true);
+		range.moveEnd("character", selectionEnd);
+		range.moveStart("character", selectionStart);
+		range.select();
+	}
+}
+
+function setCursorPosition(input, pos) {
+	setSelectionRange(input, pos, pos);
+}
+
 // Update the display
 function updateDisplay(key) {
 	var display = document.querySelector(ui.display);
+	var displayInput = document.querySelector(ui.displayInput);
 
 	if (!key) {
 		display.innerHTML = "";
+		displayInput.value = "";
 		return;
 	}
 
@@ -967,13 +1003,21 @@ function updateDisplay(key) {
 	span.style.color = key.colors.display;
 
 	var numChildren = display.children.length;
-	var index = -1;
-	if (index === -1 || index > numChildren - 1) {
-		display.appendChild(span);
-	} else {
-		display.insertBefore(span, display.children[index]);
-	}
-	display.focus();
+	var index = getCursorPosition(displayInput);
+	if (index === -1) index = numChildren - 1;
+	var isLast = index === numChildren - 1;
+
+	if (isLast) display.appendChild(span);else display.insertBefore(span, display.children[index]);
+
+	var text = displayInput.value;
+	var before = text.substring(0, index);
+	var after = text.substring(index);
+	var newVal = before + " " + after;
+	displayInput.value = newVal;
+	console.log(text.length, before.length, after.length, newVal.length);
+
+	displayInput.focus();
+	setCursorPosition(displayInput, index + 1);
 }
 
 /***/ }),

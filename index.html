@@ -23,8 +23,11 @@
 	<main>
 		<div class="calc-container">
 			<div id="calc" class="calc">
-				<div contenteditable="true" id="calc-display" class="calc-display" autocomplete="off" spellcheck="off" autocorrect="off"
-				 spellcheck="off"></div>
+				<div class="calc-display-container">
+					<div id="calc-display" class="calc-display"></div>
+					<input id="calc-display-input" class="calc-display calc-display-input" autocomplete="off" spellcheck="off" autocorrect="off"
+					 spellcheck="off" />
+				</div>
 				<table id="calc-keys" class="calc-keys"></table>
 			</div>
 			<div class="ticker">
