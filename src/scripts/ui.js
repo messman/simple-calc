@@ -144,7 +144,11 @@ export function updateDisplay(key) {
 
 export function updateOutput(result) {
 	const output = document.querySelector(ui.output);
-	if (result === null)
+	if (result === null) {
 		output.innerHTML = "";
+		output.style.visibility = "hidden";
+		return;
+	}
+	output.style.visibility = "";
 	output.innerHTML = result;
 }

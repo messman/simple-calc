@@ -1,4 +1,22 @@
 
+const Invalid = 0 / 0;
+
+const decimalMaxPrecision = 3;
+function toString(result) {
+	const num = parseFloat(result);
+	if (isNaN(num))
+		return num;
+	const r = Math.pow(10, decimalMaxPrecision);
+	return Math.round(num * r) / r;
+}
+
 export function calc(input) {
-	return eval(input.map(function (a) { return a.value }).join("")).toFixed(4);
+	let result;
+	try {
+		result = eval(input.map(function (a) { return a.value }).join(""));
+	}
+	catch (e) {
+		result = Invalid;
+	}
+	return toString(result);
 }

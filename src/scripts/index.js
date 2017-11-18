@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		switch (key.type) {
 			case KEY_TYPE.clear:
 				UI.updateDisplay(null);
+				UI.updateOutput(null);
 				input = [];
 				break;
 			default:
@@ -31,4 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				break;
 		}
 	});
+
+	UI.updateOutput(null);
 });

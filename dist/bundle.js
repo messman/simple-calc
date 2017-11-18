@@ -775,7 +775,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tmargin: .5em 0;\n\tpadding: 0 .5em;\n\ttext-align: center;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tmargin: .5em 0;\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
 
 // exports
 
@@ -865,6 +865,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		switch (key.type) {
 			case _keys.KEY_TYPE.clear:
 				UI.updateDisplay(null);
+				UI.updateOutput(null);
 				input = [];
 				break;
 			default:
@@ -875,6 +876,8 @@ document.addEventListener("DOMContentLoaded", function () {
 				break;
 		}
 	});
+
+	UI.updateOutput(null);
 });
 
 /***/ }),
@@ -1033,7 +1036,12 @@ function updateDisplay(key) {
 
 function updateOutput(result) {
 	var output = document.querySelector(ui.output);
-	if (result === null) output.innerHTML = "";
+	if (result === null) {
+		output.innerHTML = "";
+		output.style.visibility = "hidden";
+		return;
+	}
+	output.style.visibility = "";
 	output.innerHTML = result;
 }
 
@@ -1241,10 +1249,27 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.calc = calc;
+
+var Invalid = 0 / 0;
+
+var decimalMaxPrecision = 3;
+function toString(result) {
+	var num = parseFloat(result);
+	if (isNaN(num)) return num;
+	var r = Math.pow(10, decimalMaxPrecision);
+	return Math.round(num * r) / r;
+}
+
 function calc(input) {
-	return eval(input.map(function (a) {
-		return a.value;
-	}).join("")).toFixed(4);
+	var result = void 0;
+	try {
+		result = eval(input.map(function (a) {
+			return a.value;
+		}).join(""));
+	} catch (e) {
+		result = Invalid;
+	}
+	return toString(result);
 }
 
 /***/ })
