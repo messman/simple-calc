@@ -1,3 +1,7 @@
+// keys.js
+// Data on individual keys and colors
+
+// Type of key (for maths, later?)
 export const KEY_TYPE = {
 	number: 0,
 	mark: 1,
@@ -6,27 +10,29 @@ export const KEY_TYPE = {
 	clear: 4,
 	equals: 5
 }
+
+// Borrow TypeScript's enum.x = 1, enum[1] = x
 const keytypekeys = Object.keys(KEY_TYPE);
 keytypekeys.forEach(function (keytype) {
 	KEY_TYPE[KEY_TYPE[keytype]] = keytype;
 });
 
+// Create the three colors based on the percent of the h-range of HSL
 function pastelRange(percent) {
 	// Pastel: HSL
-	const h = 360 * percent;
-	// canvas, display, button
-	const l = [60, 75, 75];
-	const a = [1, .9, .9];
-	const colors = [];
-	for (let i = 0; i < l.length; i++)
-		colors.push(`hsla(${h.toFixed(1)}, 70%, ${l[i].toFixed(1)}%, ${a[i]})`);
-	return colors;
-}
+	const h = (360 * percent).toFixed(1);
+	return {
+		canvas: `hsla(${h}, 70%, 60%, 1)`,
+		display: `hsla(${h}, 70%, 75%, .9)`,
+		button: `hsla(${h}, 70%, 75%, .9)`,
+	};
+};
 
 export const keys = [
 	// Top Row
 	[
-		["C", KEY_TYPE.action],
+
+		["C", KEY_TYPE.clear, "c"],
 		["(", KEY_TYPE.parens],
 		[")", KEY_TYPE.parens],
 		["/", KEY_TYPE.operator]
@@ -50,9 +56,9 @@ export const keys = [
 		["+", KEY_TYPE.operator]
 	],
 	[
-		[0, KEY_TYPE.number, 2], // Double-width
+		[0, KEY_TYPE.number, null, 2], // Double-width
 		[".", KEY_TYPE.mark],
-		["=", KEY_TYPE.equals]
+		["=", KEY_TYPE.equals, "Enter"]
 	]
 ];
 
@@ -65,12 +71,12 @@ keys.forEach(function (row) {
 	for (let i = 0; i < row.length; i++) {
 		index++;
 		const key = row[i];
-		const pastelRanges = pastelRange(index / total);
 		row[i] = {
 			value: key[0],
 			type: key[1],
-			colors: pastelRanges,
-			size: key[2] || 1
+			keyName: key[2] || key[0],
+			colors: pastelRange(index / total),
+			size: key[3] || 1
 		}
 	}
 });

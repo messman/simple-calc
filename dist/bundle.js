@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -202,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(5);
+var	fixUrls = __webpack_require__(6);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -524,22 +524,85 @@ function updateLink (link, options, obj) {
 "use strict";
 
 
-__webpack_require__(3);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+// keys.js
+// Data on individual keys and colors
 
-__webpack_require__(6);
+// Type of key (for maths, later?)
+var KEY_TYPE = exports.KEY_TYPE = {
+	number: 0,
+	mark: 1,
+	parens: 2,
+	operator: 3,
+	clear: 4,
+	equals: 5
 
-__webpack_require__(8);
+	// Borrow TypeScript's enum.x = 1, enum[1] = x
+};var keytypekeys = Object.keys(KEY_TYPE);
+keytypekeys.forEach(function (keytype) {
+	KEY_TYPE[KEY_TYPE[keytype]] = keytype;
+});
 
-__webpack_require__(11);
+// Create the three colors based on the percent of the h-range of HSL
+function pastelRange(percent) {
+	// Pastel: HSL
+	var h = (360 * percent).toFixed(1);
+	return {
+		canvas: "hsla(" + h + ", 70%, 60%, 1)",
+		display: "hsla(" + h + ", 70%, 75%, .9)",
+		button: "hsla(" + h + ", 70%, 75%, .9)"
+	};
+};
+
+var keys = exports.keys = [
+// Top Row
+[["C", KEY_TYPE.clear, "c"], ["(", KEY_TYPE.parens], [")", KEY_TYPE.parens], ["/", KEY_TYPE.operator]], [[7, KEY_TYPE.number], [8, KEY_TYPE.number], [9, KEY_TYPE.number], ["*", KEY_TYPE.operator]], [[4, KEY_TYPE.number], [5, KEY_TYPE.number], [6, KEY_TYPE.number], ["-", KEY_TYPE.operator]], [[1, KEY_TYPE.number], [2, KEY_TYPE.number], [3, KEY_TYPE.number], ["+", KEY_TYPE.operator]], [[0, KEY_TYPE.number, null, 2], // Double-width
+[".", KEY_TYPE.mark], ["=", KEY_TYPE.equals, "Enter"]]];
+
+var total = 0;
+keys.forEach(function (row) {
+	total += row.length;
+});
+var index = 0;
+keys.forEach(function (row) {
+	for (var i = 0; i < row.length; i++) {
+		index++;
+		var key = row[i];
+		row[i] = {
+			value: key[0],
+			type: key[1],
+			keyName: key[2] || key[0],
+			colors: pastelRange(index / total),
+			size: key[3] || 1
+		};
+	}
+});
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+__webpack_require__(4);
+
+__webpack_require__(7);
+
+__webpack_require__(9);
+
+__webpack_require__(11);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(4);
+var content = __webpack_require__(5);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -564,7 +627,7 @@ if(false) {
 }
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -578,7 +641,7 @@ exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Ari
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 
@@ -673,13 +736,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(7);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -704,7 +767,7 @@ if(false) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -712,19 +775,19 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tborder: 1px solid #333;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display {\n\theight: 2em;\n\tfont-size: 2em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tcolor: white;\n\tbackground-color: #333;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\ttext-decoration: underline;\n    text-decoration-color: rgba(256, 256, 256, .3);\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display {\n\tdisplay: block;\n\tborder: 0;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground-color: #333;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\ttext-decoration: underline;\n    text-decoration-color: rgba(256, 256, 256, .3);\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
+var content = __webpack_require__(10);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -749,7 +812,7 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -763,65 +826,6 @@ exports.push([module.i, ".ticker {\n\twidth: 90%;\n\tmargin: auto;\n\tbackground
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-var KEY_TYPE = exports.KEY_TYPE = {
-	number: 0,
-	mark: 1,
-	parens: 2,
-	operator: 3,
-	clear: 4,
-	equals: 5
-};
-var keytypekeys = Object.keys(KEY_TYPE);
-keytypekeys.forEach(function (keytype) {
-	KEY_TYPE[KEY_TYPE[keytype]] = keytype;
-});
-
-function pastelRange(percent) {
-	// Pastel: HSL
-	var h = 360 * percent;
-	// canvas, display, button
-	var l = [60, 75, 75];
-	var a = [1, .9, .9];
-	var colors = [];
-	for (var i = 0; i < l.length; i++) {
-		colors.push("hsla(" + h.toFixed(1) + ", 70%, " + l[i].toFixed(1) + "%, " + a[i] + ")");
-	}return colors;
-}
-
-var keys = exports.keys = [
-// Top Row
-[["C", KEY_TYPE.action], ["(", KEY_TYPE.parens], [")", KEY_TYPE.parens], ["/", KEY_TYPE.operator]], [[7, KEY_TYPE.number], [8, KEY_TYPE.number], [9, KEY_TYPE.number], ["*", KEY_TYPE.operator]], [[4, KEY_TYPE.number], [5, KEY_TYPE.number], [6, KEY_TYPE.number], ["-", KEY_TYPE.operator]], [[1, KEY_TYPE.number], [2, KEY_TYPE.number], [3, KEY_TYPE.number], ["+", KEY_TYPE.operator]], [[0, KEY_TYPE.number, 2], // Double-width
-[".", KEY_TYPE.mark], ["=", KEY_TYPE.equals]]];
-
-var total = 0;
-keys.forEach(function (row) {
-	total += row.length;
-});
-var index = 0;
-keys.forEach(function (row) {
-	for (var i = 0; i < row.length; i++) {
-		index++;
-		var key = row[i];
-		var pastelRanges = pastelRange(index / total);
-		row[i] = {
-			value: key[0],
-			type: key[1],
-			colors: pastelRanges,
-			size: key[2] || 1
-		};
-	}
-});
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -832,7 +836,11 @@ var _ui = __webpack_require__(12);
 
 var UI = _interopRequireWildcard(_ui);
 
-var _keys = __webpack_require__(10);
+var _draw = __webpack_require__(13);
+
+var Draw = _interopRequireWildcard(_draw);
+
+var _keys = __webpack_require__(2);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -840,141 +848,23 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("Ready!");
 
-	UI.bindUI();
+	UI.bindUIOnReady();
 
-	UI.onKeyPressed.push(function (key) {
-		console.log(key);
-	});
+	Draw.bindCanvas();
 
-	var canvas = document.getElementById("background");
-
-	function resize() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-	};
-	window.onresize = resize;
-	resize();
-
-	var display = UI.getDisplay();
-
-	var canvasEntriesCount = 0;
-	var canvasEntries = [];
-	UI.onKeyPressed.push(function (key) {
-
+	UI.onKeyPressed.push(function (key, position) {
 		switch (key.type) {
 			case _keys.KEY_TYPE.clear:
-				display.innerHTML = "";
+				UI.updateDisplay(null);
+				Draw.clear();
 				break;
 			default:
-				var span = document.createElement("span");
-				span.innerHTML = key.value;
-				span.style.color = key.colors[1];
-				display.appendChild(span);
+				// Add the key to the display
+				UI.updateDisplay(key);
+				Draw.update(key, position);
 				break;
 		}
-
-		completed = false;
-		start = Date.now();
-		canvasEntries.push([key.value, key.colors, canvasEntriesCount++, start - totalStart, Math.random()]);
 	});
-
-	var totalStart = Date.now();
-
-	var completed = true;
-	var timeout = 100;
-	var start = -1;
-	function animate() {
-
-		var now = Date.now();
-		var totalElapsed = now - totalStart;
-		if (!completed) {
-			var animationElapsed = now - start;
-			if (animationElapsed < timeout) {
-				draw(animationElapsed / timeout, totalElapsed);
-			} else {
-				completed = true;
-			}
-		}
-		if (completed) {
-			draw(1, totalElapsed);
-		}
-
-		requestAnimationFrame(animate);
-	}
-
-	requestAnimationFrame(animate);
-
-	function draw(percent, totalElapsed) {
-		var rect = document.getElementById("calc").getBoundingClientRect();
-		var width = rect.width;
-		var middle = {
-			x: rect.left + width / 2,
-			y: rect.top + rect.height / 2
-		};
-
-		var radius = 100;
-
-		var ctx = canvas.getContext("2d");
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		var windowRadius = Math.sqrt(Math.pow(window.innerWidth / 2, 2) + Math.pow(window.innerHeight / 2, 2));
-		var entriesToKeep = Math.ceil(windowRadius / radius) + 1;
-		var entryDiff = canvasEntries.length - entriesToKeep;
-		if (entryDiff > 0) {
-			canvasEntries.splice(0, entryDiff);
-		}
-
-		var length = canvasEntries.length;
-
-		canvasEntries.forEach(function (entry, i) {
-			var value = entry[0];
-			var colorSet = entry[1];
-			var totalIndex = entry[2];
-			var elapsed = entry[3] + totalElapsed;
-			var random = entry[4] * Math.PI * 2;
-
-			var thisRadius = radius * (length - i - (1 - percent));
-
-			// Draw the circle
-			ctx.fillStyle = colorSet[0];
-			ctx.beginPath();
-			ctx.arc(middle.x, middle.y, thisRadius, 0, Math.PI * 2);
-			ctx.closePath();
-			ctx.fill();
-
-			var direction = totalIndex % 2 === 0;
-			var directionFlip = direction ? 1 : -1;
-			var period = 60000;
-			var offset = elapsed % period * directionFlip / period * Math.PI * 2 + random;
-			var fudge = 1000;
-			var nextOffset = (elapsed + (direction ? fudge : -fudge)) % period * directionFlip / period * Math.PI * 2 + random;
-
-			ctx.fillStyle = colorSet[1];
-			ctx.beginPath();
-			ctx.moveTo(middle.x, middle.y);
-			ctx.lineTo(middle.x + Math.cos(offset) * thisRadius, middle.y + Math.sin(offset) * thisRadius);
-			ctx.arc(middle.x, middle.y, thisRadius, offset, nextOffset);
-			ctx.closePath();
-			ctx.fill();
-
-			var angleDiff = Math.PI * 2 * (fudge / period);
-			var pt1x = Math.cos(angleDiff) * thisRadius;
-			var pt1y = Math.sin(angleDiff) * thisRadius;
-			var distance = Math.sqrt(Math.pow(thisRadius - pt1x, 2) + Math.pow(0 - pt1y, 2));
-
-			ctx.save();
-			ctx.translate(middle.x, middle.y);
-			var rotation = ((offset + offset + angleDiff) / 2 - Math.PI / 2) % (Math.PI * 2);
-			ctx.rotate(rotation);
-			ctx.translate(0, thisRadius);
-			ctx.fillStyle = colorSet[0];
-			ctx.font = Math.min(distance, radius) / 2 + "px \"Courier New\", \"Courier\", monospace";
-			ctx.textAlign = "center";
-			ctx.textBaseline = "middle";
-			ctx.fillText(value, 0, -radius / 2);
-			ctx.restore();
-		});
-	}
 });
 
 /***/ }),
@@ -987,57 +877,305 @@ document.addEventListener("DOMContentLoaded", function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.onKeyPressed = undefined;
-exports.bindUI = bindUI;
-exports.getDisplay = getDisplay;
+exports.onKeyPressed = exports.ui = undefined;
+exports.bindUIOnReady = bindUIOnReady;
+exports.updateDisplay = updateDisplay;
 
-var _keys = __webpack_require__(10);
+var _keys = __webpack_require__(2);
 
 var Keys = _interopRequireWildcard(_keys);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var ui = {
-	keys: "#calc-keys"
+// UI bindings
+var ui = exports.ui = {
+	keys: "#calc-keys",
+	display: "#calc-display"
 };
 
+// Add custom keypress listeners
 var onKeyPressed = exports.onKeyPressed = [];
-
 function keyPress(keyPressed) {
 	onKeyPressed.forEach(function (handler) {
 		if (typeof handler === "function") handler(keyPressed);
 	});
 }
 
-function bindUI() {
+// When everything is loaded, bind the UI for the keys
+function bindUIOnReady() {
 	var table = document.querySelector(ui.keys);
 	var keys = Keys.keys;
 
+	var flat = {};
+
+	// Add the keys to the page row by row
 	keys.forEach(function (row) {
+
 		var tr = document.createElement("tr");
+
 		row.forEach(function (key) {
+			// Add the background color on the TD instead, the button is slightly smaller.
 			var td = document.createElement("td");
+			td.style.backgroundColor = key.colors.button;
 			var button = document.createElement("button");
+
 			button.innerHTML = key.value;
-			button.classList.add("keytype-" + _keys.KEY_TYPE[key.type]);
-			td.style.backgroundColor = key.colors[2];
+			button.classList.add("keytype-" + Keys.KEY_TYPE[key.type]);
+
+			// For the "0", stretch the width
 			if (key.size !== 1) td.colSpan = key.size;
 
-			button.onclick = function () {
+			// When clicked, trigger
+			button.onclick = function (e) {
+				e.preventDefault();
+				e.stopImmediatePropagation();
 				keyPress(key);
 			};
 
 			td.appendChild(button);
 			tr.appendChild(td);
+
+			// Also add to the lookup table for keypress
+			flat[key.keyName] = key;
 		});
 
 		table.appendChild(tr);
 	});
+
+	var display = document.querySelector(ui.display);
+	display.addEventListener("keypress", function (e) {
+		var keyPressed = flat[e.key.toLowerCase()];
+		if (keyPressed) {
+			keyPress(keyPressed);
+		}
+		e.preventDefault();
+		e.stopImmediatePropagation();
+	});
 }
 
-function getDisplay() {
-	return document.querySelector("#calc-display");
+// Update the display
+function updateDisplay(key) {
+	var display = document.querySelector(ui.display);
+
+	if (!key) {
+		display.innerHTML = "";
+		return;
+	}
+
+	var span = document.createElement("span");
+	span.innerHTML = key.value;
+	span.style.color = key.colors.display;
+
+	var numChildren = display.children.length;
+	var index = -1;
+	if (index === -1 || index > numChildren - 1) {
+		display.appendChild(span);
+	} else {
+		display.insertBefore(span, display.children[index]);
+	}
+	display.focus();
+}
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.bindCanvas = bindCanvas;
+exports.update = update;
+exports.clear = clear;
+// All the keys we will need to draw in the canvas.
+var keysToDraw = [];
+// Keep track of total keys, as we will clear the array above
+var allKeysPressed = 0;
+
+// When we started the app.
+var appStartTime = Date.now();
+
+// The canvas we will draw to.
+var canvas = null;
+var canvasWidth = 0;
+var canvasHeight = 0;
+function resize() {
+	canvasWidth = window.innerWidth;
+	canvas.width = canvasWidth;
+	canvasHeight = window.innerHeight;
+	canvas.height = canvasHeight;
+};
+window.onresize = resize;
+
+function bindCanvas() {
+	canvas = document.getElementById("background");
+	resize();
+}
+
+// Track if we are in the requestAnimationFrame loop or not
+var isDrawing = false;
+// New keys will be animated in.
+var newKeyAnimationStart = -1;
+var newKeyAnimationTimeout = 100; //ms
+
+// Accept new keys
+function update(newKey) {
+
+	newKeyAnimationStart = Date.now();
+
+	keysToDraw.push({
+		key: newKey,
+		totalIndex: allKeysPressed++,
+		random: Math.random()
+	});
+
+	if (!isDrawing) animate();
+}
+
+// Clear everything
+function clear() {
+	keysToDraw = [];
+	if (!isDrawing) animate();
+}
+
+// The animation loop
+function animate() {
+	isDrawing = true;
+
+	// Figure out if we'll need to draw again
+	var keepDrawing = false;
+
+	var now = Date.now();
+	var totalElapsed = now - appStartTime;
+
+	// Check on the state of new key animation
+	var isNewKeyAnimationCompleted = newKeyAnimationStart === -1;
+	if (!isNewKeyAnimationCompleted) {
+		// Check how far along the animation is
+		var newKeyAnimationElapsed = now - newKeyAnimationStart;
+		isNewKeyAnimationCompleted = newKeyAnimationElapsed > newKeyAnimationTimeout;
+		// If not completed, draw the animation at its current point
+		if (isNewKeyAnimationCompleted) newKeyAnimationStart = -1;else keepDrawing = draw(newKeyAnimationElapsed / newKeyAnimationTimeout, totalElapsed);
+	}
+
+	// Otherwise if completed, draw the normal animation
+	if (isNewKeyAnimationCompleted) keepDrawing = draw(1, totalElapsed);
+
+	// If true, we have keys that aren't cleared that we should draw
+	if (keepDrawing) {
+		requestAnimationFrame(animate);
+	} else {
+		// Be done drawing, signal that this function will need to be called manually again.
+		isDrawing = false;
+	}
+}
+
+// How large a ring is
+var ringRadius = 100;
+
+// Returns a boolean of whether or not drawing should occur; if true, draws.
+function draw(newKeyAnimationPercent, totalElapsed) {
+
+	// Clear the canvas
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	// If no keys, get outta here
+	if (!keysToDraw.length) return false;
+
+	// Get our calculator position on the screen
+	var rect = document.getElementById("calc").getBoundingClientRect();
+	var width = rect.width;
+	var middle = {
+		x: rect.left + width / 2,
+		y: rect.top + rect.height / 2
+	};
+
+	// Figure out the (diagonal) radius of our window (which is the canvas size).
+	var windowRadius = Math.sqrt(Math.pow(canvasWidth / 2, 2) + Math.pow(canvasHeight / 2, 2));
+	// Only keep enough keys to draw just past the diagonal of the screen, to conserve memory.
+	var keysToKeep = Math.ceil(windowRadius / ringRadius) + 1;
+	var diff = keysToDraw.length - keysToKeep;
+	if (diff > 0) {
+		keysToDraw.splice(0, diff);
+	}
+
+	var length = keysToDraw.length;
+	if (length === 0) return false;
+
+	for (var i = 0; i < length; i++) {
+		drawSingle(ctx, keysToDraw[i], i, length, middle, newKeyAnimationPercent, totalElapsed);
+	}return true;
+}
+
+var TWO_PI = Math.PI * 2;
+// The time it takes to rotate the ring
+var blockPeriod = 60000;
+// Size of the block represents how many ms of time?
+var blockSize = 1000;
+// Size of the block in radians
+var blockSizeRadians = blockSize / blockPeriod * TWO_PI;
+
+function drawSingle(ctx, keyEntry, index, length, middle, newKeyAnimationPercent, totalElapsed) {
+
+	// Value of the key
+	var value = keyEntry.key.value;
+	// Colors of the key
+	var colors = keyEntry.key.colors;
+	// Total index (not index in array)
+	var totalIndex = keyEntry.totalIndex,
+	    random = keyEntry.random;
+
+	// The radius of this ring may be different if we are animating a new key
+
+	var radius = ringRadius * (length - index - (1 - newKeyAnimationPercent));
+
+	// Draw the circle/ring
+	ctx.fillStyle = colors.canvas;
+	ctx.beginPath();
+	ctx.arc(middle.x, middle.y, radius, 0, TWO_PI);
+	ctx.closePath();
+	ctx.fill();
+
+	// Now draw the block that will rotate.
+
+	// Direction (clockwise or counter) depends on the *total* index.
+	var clockwise = totalIndex % 2 === 0;
+
+	// Compute the angle of the block's side.
+	var blockRotation = (totalElapsed % blockPeriod / blockPeriod + random) * (clockwise ? 1 : -1) * TWO_PI;
+	var blockRotationNext = blockSizeRadians * (clockwise ? -1 : 1);
+
+	// Draw an arc (pizza slice) out from the middle
+	ctx.fillStyle = colors.display;
+	ctx.beginPath();
+	ctx.moveTo(middle.x, middle.y);
+	ctx.lineTo(middle.x + Math.cos(blockRotation) * radius, middle.y + Math.sin(blockRotation) * radius);
+	ctx.arc(middle.x, middle.y, radius, blockRotation, blockRotation + blockRotationNext, clockwise);
+	ctx.closePath();
+	ctx.fill();
+
+	// Compute the line distance between the two furthest points of our slice block.
+	var pt1x = Math.cos(blockSizeRadians) * radius;
+	var pt1y = Math.sin(blockSizeRadians) * radius;
+	var distance = Math.sqrt(Math.pow(radius - pt1x, 2) + Math.pow(0 - pt1y, 2));
+
+	// Draw the value of the key.
+	ctx.save();
+	ctx.translate(middle.x, middle.y);
+	var rotation = ((blockRotation + blockRotation + blockRotationNext) / 2 - Math.PI / 2) % TWO_PI;
+	ctx.rotate(rotation);
+	ctx.translate(0, radius);
+	ctx.fillStyle = colors.canvas;
+	ctx.font = Math.min(distance, ringRadius) / 2 + "px \"Courier New\", \"Courier\", monospace";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+	ctx.fillText(value, 0, -ringRadius / 2);
+	ctx.restore();
 }
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

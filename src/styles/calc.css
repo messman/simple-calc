@@ -4,16 +4,19 @@
 	border-radius: 3px;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
-	border: 1px solid #333;
 	box-shadow: 1px 1px 5px 0 #333;
 	background-color: transparent;
 }
 
 .calc-display {
+	display: block;
+	border: 0;
+	width: 100%;
 	height: 2em;
 	font-size: 2em;
 	line-height: 2em;
 	padding: 0 .5em;
+	box-sizing: border-box;
 	color: white;
 	background-color: #333;
 	font-family: "Courier New", "Courier", monospace;
