@@ -1,0 +1,33 @@
+{
+	"name": "simple-calc",
+	"version": "1.0.0",
+	"description": "A simple calculator written in ES2015.",
+	"main": "index.js",
+	"scripts": {
+		"build": "webpack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/messman/simple-calc.git"
+	},
+	"keywords": [
+		"calculator",
+		"javascript",
+		"css",
+		"es2015",
+		"canvas",
+		"animation"
+	],
+	"author": "Andrew Messier",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/messman/simple-calc/issues"
+	},
+	"homepage": "https://github.com/messman/simple-calc#readme",
+	"devDependencies": {
+		"babel-core": "^6.26.0",
+		"babel-loader": "^7.1.2",
+		"babel-preset-env": "^1.6.1",
+		"webpack": "^3.8.1"
+	}
+}
