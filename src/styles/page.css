@@ -28,7 +28,7 @@ main {
 }
 
 .calc-container {
-	width: 400px;
+	width: 320px;
 }
 
 .background {
@@ -53,6 +53,6 @@ main {
 	}		
 	
 	.calc-container {
-		width: 320px;
+		width: 280px;
 	}
 }

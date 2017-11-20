@@ -558,8 +558,8 @@ function pastelRange(percent) {
 
 var keys = exports.keys = [
 // Top Row
-[["C", KEY_TYPE.clear, "c"], ["(", KEY_TYPE.parens], [")", KEY_TYPE.parens], ["/", KEY_TYPE.operator]], [[7, KEY_TYPE.number], [8, KEY_TYPE.number], [9, KEY_TYPE.number], ["*", KEY_TYPE.operator]], [[4, KEY_TYPE.number], [5, KEY_TYPE.number], [6, KEY_TYPE.number], ["-", KEY_TYPE.operator]], [[1, KEY_TYPE.number], [2, KEY_TYPE.number], [3, KEY_TYPE.number], ["+", KEY_TYPE.operator]], [[0, KEY_TYPE.number, null, 2], // Double-width
-[".", KEY_TYPE.mark], ["=", KEY_TYPE.equals, "Enter"]]];
+[["C", KEY_TYPE.clear, "c"], ["(", KEY_TYPE.parens], [")", KEY_TYPE.parens], ["=", KEY_TYPE.equals, "Enter"]], [[7, KEY_TYPE.number], [8, KEY_TYPE.number], [9, KEY_TYPE.number], ["/", KEY_TYPE.operator]], [[4, KEY_TYPE.number], [5, KEY_TYPE.number], [6, KEY_TYPE.number], ["*", KEY_TYPE.operator]], [[1, KEY_TYPE.number], [2, KEY_TYPE.number], [3, KEY_TYPE.number], ["-", KEY_TYPE.operator]], [[0, KEY_TYPE.number, null, 2], // Double-width
+[".", KEY_TYPE.mark], ["+", KEY_TYPE.operator]]];
 
 var total = 0;
 keys.forEach(function (row) {
@@ -635,7 +635,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 400px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 320px;\n\t}\n}", ""]);
+exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 320px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 280px;\n\t}\n}", ""]);
 
 // exports
 
@@ -775,7 +775,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tborder: 1px solid #333;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tmargin: .5em 0;\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
 
 // exports
 
@@ -1083,6 +1083,8 @@ function resize() {
 	canvas.width = canvasWidth;
 	canvasHeight = window.innerHeight;
 	canvas.height = canvasHeight;
+
+	ringRadius = canvasWidth < 500 ? 50 : 100;
 };
 window.onresize = resize;
 

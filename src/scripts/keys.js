@@ -31,34 +31,33 @@ function pastelRange(percent) {
 export const keys = [
 	// Top Row
 	[
-
 		["C", KEY_TYPE.clear, "c"],
 		["(", KEY_TYPE.parens],
 		[")", KEY_TYPE.parens],
-		["/", KEY_TYPE.operator]
+		["=", KEY_TYPE.equals, "Enter"]
 	],
 	[
 		[7, KEY_TYPE.number],
 		[8, KEY_TYPE.number],
 		[9, KEY_TYPE.number],
-		["*", KEY_TYPE.operator]
+		["/", KEY_TYPE.operator]
 	],
 	[
 		[4, KEY_TYPE.number],
 		[5, KEY_TYPE.number],
 		[6, KEY_TYPE.number],
-		["-", KEY_TYPE.operator]
+		["*", KEY_TYPE.operator]
 	],
 	[
 		[1, KEY_TYPE.number],
 		[2, KEY_TYPE.number],
 		[3, KEY_TYPE.number],
-		["+", KEY_TYPE.operator]
+		["-", KEY_TYPE.operator]
 	],
 	[
 		[0, KEY_TYPE.number, null, 2], // Double-width
 		[".", KEY_TYPE.mark],
-		["=", KEY_TYPE.equals, "Enter"]
+		["+", KEY_TYPE.operator]
 	]
 ];
 

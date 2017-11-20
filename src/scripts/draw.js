@@ -15,6 +15,8 @@ function resize() {
 	canvas.width = canvasWidth;
 	canvasHeight = window.innerHeight;
 	canvas.height = canvasHeight;
+
+	ringRadius = (canvasWidth < 500) ? 50 : 100;
 };
 window.onresize = resize;
 
@@ -82,8 +84,7 @@ function animate() {
 }
 
 // How large a ring is
-const ringRadius = 100;
-
+let ringRadius = 100;
 
 // Returns a boolean of whether or not drawing should occur; if true, draws.
 function draw(newKeyAnimationPercent, totalElapsed) {
