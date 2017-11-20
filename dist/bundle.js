@@ -855,6 +855,8 @@ var input = [];
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("Ready!");
 
+	UI.detectTouch();
+
 	UI.bindUIOnReady();
 
 	Draw.bindCanvas();
@@ -891,6 +893,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.onKeyPressed = exports.ui = undefined;
+exports.detectTouch = detectTouch;
 exports.bindUIOnReady = bindUIOnReady;
 exports.updateDisplay = updateDisplay;
 exports.updateOutput = updateOutput;
@@ -908,6 +911,12 @@ var ui = exports.ui = {
 	display: "#calc-display",
 	output: "#calc-output"
 };
+
+// Check for touch events
+var isTouch = false;
+function detectTouch() {
+	isTouch = "ontouchstart" in document.documentElement;
+}
 
 // Add custom keypress listeners
 var onKeyPressed = exports.onKeyPressed = [];
@@ -984,10 +993,11 @@ function getCursorPosition(el) {
 	return -1;
 }
 
-function setSelectionRange(input, selectionStart, selectionEnd) {
+function setSelectionRange(isTouch, input, selectionStart, selectionEnd) {
 	if (input.setSelectionRange) {
 		input.focus();
 		input.setSelectionRange(selectionStart, selectionEnd);
+		if (isTouch) input.blur();
 	} else if (input.createTextRange) {
 		// IE
 		var range = input.createTextRange();
@@ -995,11 +1005,12 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 		range.moveEnd("character", selectionEnd);
 		range.moveStart("character", selectionStart);
 		range.select();
+		if (!isTouch) input.focus();
 	}
 }
 
-function setCursorPosition(input, pos) {
-	setSelectionRange(input, pos, pos);
+function setCursorPosition(isTouch, input, pos) {
+	setSelectionRange(isTouch, input, pos, pos);
 }
 
 // Update the display
@@ -1028,10 +1039,8 @@ function updateDisplay(key) {
 	var after = text.substring(index);
 	var newVal = before + " " + after;
 	displayInput.value = newVal;
-	console.log(text.length, before.length, after.length, newVal.length);
 
-	displayInput.focus();
-	setCursorPosition(displayInput, index + 1);
+	setCursorPosition(isTouch, displayInput, index + 1);
 }
 
 function updateOutput(result) {

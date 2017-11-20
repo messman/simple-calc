@@ -10,6 +10,8 @@ let input = [];
 document.addEventListener("DOMContentLoaded", function () {
 	console.log("Ready!");
 
+	UI.detectTouch();
+
 	UI.bindUIOnReady();
 
 	Draw.bindCanvas();

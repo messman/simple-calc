@@ -8,6 +8,12 @@ export const ui = {
 	output: "#calc-output",
 };
 
+// Check for touch events
+let isTouch = false;
+export function detectTouch() {
+	isTouch = "ontouchstart" in document.documentElement;
+}
+
 // Add custom keypress listeners
 export const onKeyPressed = [];
 function keyPress(keyPressed) {
@@ -86,10 +92,12 @@ function getCursorPosition(el) {
 	return -1;
 }
 
-function setSelectionRange(input, selectionStart, selectionEnd) {
+function setSelectionRange(isTouch, input, selectionStart, selectionEnd) {
 	if (input.setSelectionRange) {
 		input.focus();
 		input.setSelectionRange(selectionStart, selectionEnd);
+		if (isTouch)
+			input.blur();
 	}
 	else if (input.createTextRange) {
 		// IE
@@ -98,11 +106,13 @@ function setSelectionRange(input, selectionStart, selectionEnd) {
 		range.moveEnd("character", selectionEnd);
 		range.moveStart("character", selectionStart);
 		range.select();
+		if (!isTouch)
+			input.focus();
 	}
 }
 
-function setCursorPosition(input, pos) {
-	setSelectionRange(input, pos, pos);
+function setCursorPosition(isTouch, input, pos) {
+	setSelectionRange(isTouch, input, pos, pos);
 }
 
 // Update the display
@@ -136,10 +146,8 @@ export function updateDisplay(key) {
 	const after = text.substring(index);
 	const newVal = before + " " + after;
 	displayInput.value = newVal;
-	console.log(text.length, before.length, after.length, newVal.length)
 
-	displayInput.focus();
-	setCursorPosition(displayInput, index + 1);
+	setCursorPosition(isTouch, displayInput, index + 1);
 }
 
 export function updateOutput(result) {
