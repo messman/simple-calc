@@ -126,7 +126,7 @@ const TWO_PI = Math.PI * 2;
 // The time it takes to rotate the ring
 const blockPeriod = 60000;
 // Size of the block represents how many ms of time?
-const blockSize = 1000;
+const blockSize = 5000;
 // Size of the block in radians
 const blockSizeRadians = blockSize / blockPeriod * TWO_PI;
 
@@ -179,7 +179,7 @@ function drawSingle(ctx, keyEntry, index, length, middle, newKeyAnimationPercent
 	ctx.rotate(rotation);
 	ctx.translate(0, radius);
 	ctx.fillStyle = colors.canvas;
-	ctx.font = `${Math.min(distance, ringRadius) / 2}px "Courier New", "Courier", monospace`;
+	ctx.font = `bold ${Math.min(distance, ringRadius) / 2}px "Courier New", "Courier", monospace`;
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
 	ctx.fillText(value, 0, -ringRadius / 2);
