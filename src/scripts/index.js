@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
 	UI.onKeyPressed.push(function (key) {
 		Draw.update(key);
 
+		if (!key) {
+			// In case we backspaced
+			UI.updateOutput(Calculator.calc(input));
+			return;
+		}
 
 		switch (key.type) {
 			case KEY_TYPE.clear:

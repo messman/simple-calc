@@ -23,8 +23,7 @@ function pastelRange(percent) {
 	const h = (360 * percent).toFixed(1);
 	return {
 		canvas: `hsla(${h}, 70%, 60%, 1)`,
-		display: `hsla(${h}, 70%, 75%, .9)`,
-		button: `hsla(${h}, 70%, 75%, .9)`,
+		button: `hsla(${h}, 70%, 75%, 1)`,
 	};
 };
 

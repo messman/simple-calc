@@ -551,8 +551,7 @@ function pastelRange(percent) {
 	var h = (360 * percent).toFixed(1);
 	return {
 		canvas: "hsla(" + h + ", 70%, 60%, 1)",
-		display: "hsla(" + h + ", 70%, 75%, .9)",
-		button: "hsla(" + h + ", 70%, 75%, .9)"
+		button: "hsla(" + h + ", 70%, 75%, 1)"
 	};
 };
 
@@ -635,7 +634,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 320px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 280px;\n\t}\n}", ""]);
+exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Arial\";\n\tcolor: #333;\n\tbackground-color: #ececec;\n}\n\nhtml, body {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nheader {\n\tposition: relative;\n\tz-index: 1;\n}\n\nmain {\n\tposition: absolute;\n\tdisplay: flex;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 0;\n\talign-items: center;\n\tjustify-content: space-around;\n}\n\n.calc-container {\n\twidth: 300px;\n}\n\n.background {\n\tz-index: -1;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.header-inline {\n\tdisplay: inline-block;\n\tbackground-color: #ececec;\n\tpadding: 0 1em;\n\tmargin: .5em;\n}\n\n@media screen and (max-width: 500px), screen and (max-height: 600px) {\n\theader {\n\t\tdisplay: none;\n\t}\t\t\n\t\n\t.calc-container {\n\t\twidth: 260px;\n\t}\n}", ""]);
 
 // exports
 
@@ -775,7 +774,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: .8em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\toverflow: auto;\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n\tbox-shadow: 0 0 15px 3px rgba(100, 100, 100, 0.2) inset;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
 
 // exports
 
@@ -864,6 +863,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	UI.onKeyPressed.push(function (key) {
 		Draw.update(key);
 
+		if (!key) {
+			// In case we backspaced
+			UI.updateOutput(Calculator.calc(input));
+			return;
+		}
+
 		switch (key.type) {
 			case _keys.KEY_TYPE.clear:
 				UI.updateDisplay(null);
@@ -911,7 +916,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var ui = exports.ui = {
 	keys: "#calc-keys",
 	displayInput: "#calc-display-input",
-	display: "#calc-display",
 	output: "#calc-output"
 };
 
@@ -971,13 +975,11 @@ function bindUIOnReady() {
 	});
 
 	var displayInput = document.querySelector(ui.displayInput);
-	displayInput.addEventListener("keypress", function (e) {
-		var keyPressed = flat[e.key.toLowerCase()];
-		if (keyPressed) {
-			keyPress(keyPressed);
-		}
-		e.preventDefault();
-		e.stopImmediatePropagation();
+	displayInput.addEventListener("keyup", function (e) {
+		var keyPressed = flat[e.key.toLowerCase()] || null;
+		keyPress(keyPressed);
+
+		console.log(e.key);
 	});
 }
 
@@ -996,55 +998,48 @@ function getCursorPosition(el) {
 	return -1;
 }
 
-function setSelectionRange(isTouch, input, selectionStart, selectionEnd) {
+function setSelectionRange(focus, input, selectionStart, selectionEnd) {
 	if (input.setSelectionRange) {
 		input.focus();
 		input.setSelectionRange(selectionStart, selectionEnd);
-		if (isTouch) input.blur();
-	} else if (input.createTextRange) {
-		// IE
-		var range = input.createTextRange();
-		range.collapse(true);
-		range.moveEnd("character", selectionEnd);
-		range.moveStart("character", selectionStart);
-		range.select();
-		if (!isTouch) input.focus();
+		if (!focus) input.blur();
+	} else {
+		if (input.createTextRange) {
+			// IE
+			var range = input.createTextRange();
+			range.collapse(true);
+			range.moveEnd("character", selectionEnd);
+			range.moveStart("character", selectionStart);
+			range.select();
+		}
+		if (focus) input.focus();
 	}
 }
 
-function setCursorPosition(isTouch, input, pos) {
-	setSelectionRange(isTouch, input, pos, pos);
+function setCursorPosition(focus, input, pos) {
+	setSelectionRange(focus, input, pos, pos);
 }
 
 // Update the display
 function updateDisplay(key) {
-	var display = document.querySelector(ui.display);
 	var displayInput = document.querySelector(ui.displayInput);
 
 	// If no key, clear the displays.
 	if (!key) {
-		display.innerHTML = "";
 		displayInput.value = "";
 		return;
 	}
 
-	var span = document.createElement("span");
-	span.innerHTML = key.value;
-	span.style.color = key.colors.display;
-
-	var numChildren = display.children.length;
-	var index = getCursorPosition(displayInput);
-	if (index === -1) index = numChildren;
-
-	if (index === numChildren) display.appendChild(span);else display.insertBefore(span, display.children[index]);
-
 	var text = displayInput.value;
+	var index = getCursorPosition(displayInput);
+	if (index === -1) index = text.length;
+
 	var before = text.substring(0, index);
 	var after = text.substring(index);
-	var newVal = before + " " + after;
+	var newVal = before + key.value + after;
 	displayInput.value = newVal;
 
-	setCursorPosition(isTouch, displayInput, index + 1);
+	setCursorPosition(false, displayInput, index + 1);
 }
 
 function updateOutput(result) {
@@ -1085,7 +1080,7 @@ var allKeysPressed = 0;
 var appStartTime = Date.now();
 
 var largeRingRadius = 80;
-var smallRingRadius = 50;
+var smallRingRadius = 40;
 // How large a ring is
 var ringRadius = largeRingRadius;
 
@@ -1116,6 +1111,7 @@ var newKeyAnimationTimeout = 100; //ms
 
 // Accept new keys
 function update(newKey) {
+	if (!newKey) return;
 
 	newKeyAnimationStart = Date.now();
 
@@ -1234,7 +1230,7 @@ function drawSingle(ctx, keyEntry, index, length, middle, newKeyAnimationPercent
 	var blockRotationNext = blockSizeRadians * (clockwise ? -1 : 1);
 
 	// Draw an arc (pizza slice) out from the middle
-	ctx.fillStyle = colors.display;
+	ctx.fillStyle = colors.button;
 	ctx.beginPath();
 	ctx.moveTo(middle.x, middle.y);
 	ctx.lineTo(middle.x + Math.cos(blockRotation) * radius, middle.y + Math.sin(blockRotation) * radius);

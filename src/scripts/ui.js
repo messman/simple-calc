@@ -4,7 +4,6 @@ import * as Keys from "./keys.js";
 export const ui = {
 	keys: "#calc-keys",
 	displayInput: "#calc-display-input",
-	display: "#calc-display",
 	output: "#calc-output",
 };
 
@@ -66,13 +65,11 @@ export function bindUIOnReady() {
 	});
 
 	const displayInput = document.querySelector(ui.displayInput);
-	displayInput.addEventListener("keypress", function (e) {
-		const keyPressed = flat[e.key.toLowerCase()];
-		if (keyPressed) {
-			keyPress(keyPressed);
-		}
-		e.preventDefault();
-		e.stopImmediatePropagation();
+	displayInput.addEventListener("keyup", function (e) {
+		const keyPressed = flat[e.key.toLowerCase()] || null;
+		keyPress(keyPressed);
+
+		console.log(e.key);
 	});
 }
 
@@ -92,63 +89,52 @@ function getCursorPosition(el) {
 	return -1;
 }
 
-function setSelectionRange(isTouch, input, selectionStart, selectionEnd) {
+function setSelectionRange(focus, input, selectionStart, selectionEnd) {
 	if (input.setSelectionRange) {
 		input.focus();
 		input.setSelectionRange(selectionStart, selectionEnd);
-		if (isTouch)
+		if (!focus)
 			input.blur();
 	}
-	else if (input.createTextRange) {
-		// IE
-		var range = input.createTextRange();
-		range.collapse(true);
-		range.moveEnd("character", selectionEnd);
-		range.moveStart("character", selectionStart);
-		range.select();
-		if (!isTouch)
+	else {
+		if (input.createTextRange) {
+			// IE
+			var range = input.createTextRange();
+			range.collapse(true);
+			range.moveEnd("character", selectionEnd);
+			range.moveStart("character", selectionStart);
+			range.select();
+		}
+		if (focus)
 			input.focus();
 	}
 }
 
-function setCursorPosition(isTouch, input, pos) {
-	setSelectionRange(isTouch, input, pos, pos);
+function setCursorPosition(focus, input, pos) {
+	setSelectionRange(focus, input, pos, pos);
 }
 
 // Update the display
 export function updateDisplay(key) {
-	const display = document.querySelector(ui.display);
 	const displayInput = document.querySelector(ui.displayInput);
 
 	// If no key, clear the displays.
 	if (!key) {
-		display.innerHTML = "";
 		displayInput.value = "";
 		return;
 	}
 
-	var span = document.createElement("span");
-	span.innerHTML = key.value;
-	span.style.color = key.colors.display;
-
-	const numChildren = display.children.length;
+	let text = displayInput.value;
 	let index = getCursorPosition(displayInput);
 	if (index === -1)
-		index = numChildren;
+		index = text.length;
 
-	if (index === numChildren)
-		display.appendChild(span);
-	else
-		display.insertBefore(span, display.children[index]);
-
-
-	let text = displayInput.value;
 	const before = text.substring(0, index);
 	const after = text.substring(index);
-	const newVal = before + " " + after;
+	const newVal = before + key.value + after;
 	displayInput.value = newVal;
 
-	setCursorPosition(isTouch, displayInput, index + 1);
+	setCursorPosition(false, displayInput, index + 1);
 }
 
 export function updateOutput(result) {

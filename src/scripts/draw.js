@@ -7,7 +7,7 @@ let allKeysPressed = 0;
 const appStartTime = Date.now();
 
 const largeRingRadius = 80;
-const smallRingRadius = 50;
+const smallRingRadius = 40;
 // How large a ring is
 let ringRadius = largeRingRadius;
 
@@ -38,6 +38,8 @@ let newKeyAnimationTimeout = 100; //ms
 
 // Accept new keys
 export function update(newKey) {
+	if (!newKey)
+		return;
 
 	newKeyAnimationStart = Date.now();
 
@@ -162,7 +164,7 @@ function drawSingle(ctx, keyEntry, index, length, middle, newKeyAnimationPercent
 	const blockRotationNext = blockSizeRadians * (clockwise ? -1 : 1);
 
 	// Draw an arc (pizza slice) out from the middle
-	ctx.fillStyle = colors.display;
+	ctx.fillStyle = colors.button;
 	ctx.beginPath();
 	ctx.moveTo(middle.x, middle.y);
 	ctx.lineTo(middle.x + (Math.cos(blockRotation) * radius), middle.y + (Math.sin(blockRotation) * radius));

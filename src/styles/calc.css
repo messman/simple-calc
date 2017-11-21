@@ -26,20 +26,14 @@
 	border: 0;
 	width: 100%;
 	height: 100%;
-	font-size: 1em;
+	font-size: .8em;
 	line-height: 2em;
 	padding: 0 .5em;
 	box-sizing: border-box;
 	color: white;
 	background: transparent;
 	font-family: "Courier New", "Courier", monospace;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.calc-display-input {
-	text-decoration: underline;
-	text-decoration-color: rgba(256, 256, 256, .3);
+	overflow: auto;
 }
 
 .calc-keys {
@@ -56,6 +50,7 @@
 .calc-keys td {
 	padding: 2px;
 	background-color: #f9f9f9;
+	box-shadow: 0 0 15px 3px rgba(100, 100, 100, 0.2) inset;
 }
 
 .calc-keys td button {
