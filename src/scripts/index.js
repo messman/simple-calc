@@ -36,4 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	UI.updateOutput(null);
+
+	UI.startupFocus();
 });

@@ -120,6 +120,7 @@ export function updateDisplay(key) {
 	const display = document.querySelector(ui.display);
 	const displayInput = document.querySelector(ui.displayInput);
 
+	// If no key, clear the displays.
 	if (!key) {
 		display.innerHTML = "";
 		displayInput.value = "";
@@ -159,4 +160,11 @@ export function updateOutput(result) {
 	}
 	output.style.visibility = "";
 	output.innerHTML = result;
+}
+
+export function startupFocus() {
+	if (isTouch)
+		return;
+	const displayInput = document.querySelector(ui.displayInput);
+	displayInput.focus();
 }

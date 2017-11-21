@@ -6,6 +6,11 @@ let allKeysPressed = 0;
 // When we started the app.
 const appStartTime = Date.now();
 
+const largeRingRadius = 80;
+const smallRingRadius = 50;
+// How large a ring is
+let ringRadius = largeRingRadius;
+
 // The canvas we will draw to.
 let canvas = null;
 let canvasWidth = 0;
@@ -16,7 +21,7 @@ function resize() {
 	canvasHeight = window.innerHeight;
 	canvas.height = canvasHeight;
 
-	ringRadius = (canvasWidth < 500) ? 50 : 100;
+	ringRadius = (canvasWidth < 500) ? smallRingRadius : largeRingRadius;
 };
 window.onresize = resize;
 
@@ -82,9 +87,6 @@ function animate() {
 		isDrawing = false;
 	}
 }
-
-// How large a ring is
-let ringRadius = 100;
 
 // Returns a boolean of whether or not drawing should occur; if true, draws.
 function draw(newKeyAnimationPercent, totalElapsed) {

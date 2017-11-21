@@ -775,7 +775,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: 1em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.calc-display-input {\n\ttext-decoration: underline;\n\ttext-decoration-color: rgba(256, 256, 256, .3);\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
 
 // exports
 
@@ -880,6 +880,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	UI.updateOutput(null);
+
+	UI.startupFocus();
 });
 
 /***/ }),
@@ -897,6 +899,7 @@ exports.detectTouch = detectTouch;
 exports.bindUIOnReady = bindUIOnReady;
 exports.updateDisplay = updateDisplay;
 exports.updateOutput = updateOutput;
+exports.startupFocus = startupFocus;
 
 var _keys = __webpack_require__(2);
 
@@ -1018,6 +1021,7 @@ function updateDisplay(key) {
 	var display = document.querySelector(ui.display);
 	var displayInput = document.querySelector(ui.displayInput);
 
+	// If no key, clear the displays.
 	if (!key) {
 		display.innerHTML = "";
 		displayInput.value = "";
@@ -1054,6 +1058,12 @@ function updateOutput(result) {
 	output.innerHTML = result;
 }
 
+function startupFocus() {
+	if (isTouch) return;
+	var displayInput = document.querySelector(ui.displayInput);
+	displayInput.focus();
+}
+
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1074,6 +1084,11 @@ var allKeysPressed = 0;
 // When we started the app.
 var appStartTime = Date.now();
 
+var largeRingRadius = 80;
+var smallRingRadius = 50;
+// How large a ring is
+var ringRadius = largeRingRadius;
+
 // The canvas we will draw to.
 var canvas = null;
 var canvasWidth = 0;
@@ -1084,7 +1099,7 @@ function resize() {
 	canvasHeight = window.innerHeight;
 	canvas.height = canvasHeight;
 
-	ringRadius = canvasWidth < 500 ? 50 : 100;
+	ringRadius = canvasWidth < 500 ? smallRingRadius : largeRingRadius;
 };
 window.onresize = resize;
 
@@ -1144,9 +1159,6 @@ function animate() {
 		isDrawing = false;
 	}
 }
-
-// How large a ring is
-var ringRadius = 100;
 
 // Returns a boolean of whether or not drawing should occur; if true, draws.
 function draw(newKeyAnimationPercent, totalElapsed) {
