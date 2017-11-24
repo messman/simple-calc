@@ -550,8 +550,8 @@ function pastelRange(percent) {
 	// Pastel: HSL
 	var h = (360 * percent).toFixed(1);
 	return {
-		canvas: "hsla(" + h + ", 70%, 60%, 1)",
-		button: "hsla(" + h + ", 70%, 75%, 1)"
+		canvas: "hsla(" + h + ", 70%, 65%, 1)",
+		button: "hsla(" + h + ", 70%, 90%, 1)"
 	};
 };
 
@@ -774,7 +774,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: .8em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\toverflow: auto;\n}\n\n.calc-keys {\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n\tbox-shadow: 0 0 15px 3px rgba(100, 100, 100, 0.2) inset;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tcolor:#333;\n\n\tfont-size: 1.5em;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
+exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition: relative;\n\twidth: 100%;\n\tborder-radius: 3px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tbox-shadow: 1px 1px 5px 0 #333;\n\tborder: 2px solid #333;\n\tbackground-color: transparent;\n}\n\n.calc-display-container {\n\tposition: relative;\n\twidth: 100%;\n\theight: 2em;\n\tfont-size: 2em;\n\tbackground-color: #333;\n}\n\n.calc-display {\n\tdisplay: block;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tborder: 0;\n\twidth: 100%;\n\theight: 100%;\n\tfont-size: .8em;\n\tline-height: 2em;\n\tpadding: 0 .5em;\n\tbox-sizing: border-box;\n\tcolor: white;\n\tbackground: transparent;\n\tfont-family: \"Courier New\", \"Courier\", monospace;\n\toverflow: auto;\n}\n\n.calc-keys {\n\tcolor:#333;\n\twidth: 100%;\n\tborder-collapse: collapse;\n\tborder: none;\n\ttable-layout: fixed;\n}\n\n.calc-keys tr {\n\tborder: none;\n}\n\n.calc-keys td {\n\tpadding: 2px;\n\tbackground-color: #f9f9f9;\n}\n\n.calc-keys td button {\n\tdisplay: table-cell;\n\twidth: 100%;\n\theight: 100%;\n\n\tfont-size: 1.5em;\n\tcolor: inherit;\n\n\tborder: 0;\n\tborder-radius: 0;\n\tpadding: 10px;\n\t\n\tcursor: pointer;\n\tbackground-color: transparent;\n\tuser-select: none;\n\t-webkit-user-select: none;\n\tfont-weight: bold;\n}\n\n.calc-keys td:hover {\n\tbackground-color: #eee;\n}\n\n.calc-keys td:active {\n\tbackground-color: #ddd;\n}\n\n.calc-output-container {\n\tposition: absolute;\n\ttop: -3em;\n\twidth: 100%;\n\ttext-align: center;\n}\n\n.calc-output {\n\tdisplay: inline-block;\n\theight: 1.5em;\n\tline-height: 1.5em;\n\tfont-size: 1.5em;\n\tcolor: #444;\n\tbackground: rgba(250, 250, 250, .5);\n\tpadding: 0 .5em;\n\ttext-align: center;\n\tfont-weight: bold;\n}", ""]);
 
 // exports
 
@@ -839,16 +839,7 @@ var _draw = __webpack_require__(13);
 
 var Draw = _interopRequireWildcard(_draw);
 
-var _keys = __webpack_require__(2);
-
-var _calculate = __webpack_require__(14);
-
-var Calculator = _interopRequireWildcard(_calculate);
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-// Calcualtor's current expression
-var input = [];
 
 // Entry point to application
 document.addEventListener("DOMContentLoaded", function () {
@@ -860,31 +851,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	Draw.bindCanvas();
 
-	UI.onKeyPressed.push(function (key) {
+	UI.onKeyPressed.push(function (key, isButton) {
 		Draw.update(key);
-
-		if (!key) {
-			// In case we backspaced
-			UI.updateOutput(Calculator.calc(input));
-			return;
-		}
-
-		switch (key.type) {
-			case _keys.KEY_TYPE.clear:
-				UI.updateDisplay(null);
-				UI.updateOutput(null);
-				input = [];
-				break;
-			default:
-				// Add the key to the display
-				UI.updateDisplay(key);
-				input.push(key);
-				UI.updateOutput(Calculator.calc(input));
-				break;
-		}
+		UI.update(key, isButton);
 	});
 
-	UI.updateOutput(null);
+	UI.initOutput(null);
 
 	UI.startupFocus();
 });
@@ -902,13 +874,17 @@ Object.defineProperty(exports, "__esModule", {
 exports.onKeyPressed = exports.ui = undefined;
 exports.detectTouch = detectTouch;
 exports.bindUIOnReady = bindUIOnReady;
-exports.updateDisplay = updateDisplay;
-exports.updateOutput = updateOutput;
+exports.update = update;
+exports.initOutput = initOutput;
 exports.startupFocus = startupFocus;
 
 var _keys = __webpack_require__(2);
 
 var Keys = _interopRequireWildcard(_keys);
+
+var _calculate = __webpack_require__(14);
+
+var Calculator = _interopRequireWildcard(_calculate);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -927,9 +903,9 @@ function detectTouch() {
 
 // Add custom keypress listeners
 var onKeyPressed = exports.onKeyPressed = [];
-function keyPress(keyPressed) {
+function keyPress(keyPressed, isButton) {
 	onKeyPressed.forEach(function (handler) {
-		if (typeof handler === "function") handler(keyPressed);
+		if (typeof handler === "function") handler(keyPressed, isButton);
 	});
 }
 
@@ -948,7 +924,10 @@ function bindUIOnReady() {
 		row.forEach(function (key) {
 			// Add the background color on the TD instead, the button is slightly smaller.
 			var td = document.createElement("td");
-			td.style.backgroundColor = key.colors.button;
+			td.style.backgroundColor = key.colors.canvas;
+			td.style.color = key.colors.button;
+			//td.style.boxShadow = `0 0 15px 3px ${key.colors.button} inset`;
+
 			var button = document.createElement("button");
 
 			button.innerHTML = key.value;
@@ -961,7 +940,7 @@ function bindUIOnReady() {
 			td.onclick = function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
-				keyPress(key);
+				keyPress(key, true);
 			};
 
 			td.appendChild(button);
@@ -977,9 +956,12 @@ function bindUIOnReady() {
 	var displayInput = document.querySelector(ui.displayInput);
 	displayInput.addEventListener("keyup", function (e) {
 		var keyPressed = flat[e.key.toLowerCase()] || null;
-		keyPress(keyPressed);
-
-		console.log(e.key);
+		console.log(e.key, keyPressed);
+		if (keyPressed) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+		}
+		keyPress(keyPressed, false);
 	});
 }
 
@@ -1020,37 +1002,70 @@ function setCursorPosition(focus, input, pos) {
 	setSelectionRange(focus, input, pos, pos);
 }
 
-// Update the display
-function updateDisplay(key) {
-	var displayInput = document.querySelector(ui.displayInput);
+function update(key, isButton) {
+	var display = document.querySelector(ui.displayInput);
+	var output = document.querySelector(ui.output);
 
-	// If no key, clear the displays.
-	if (!key) {
-		displayInput.value = "";
-		return;
+	var updateDisplay = false;
+	var newOutput = void 0,
+	    newDisplay = void 0;
+
+	if (key) {
+		switch (key.type) {
+			case Keys.KEY_TYPE.clear:
+				updateDisplay = true;
+				newDisplay = "";
+				newOutput = "";
+				break;
+			case Keys.KEY_TYPE.equals:
+				updateDisplay = true;
+				newDisplay = Calculator.calc(display.value);
+				newOutput = newDisplay;
+				break;
+			default:
+				// Add the key to the display
+				if (isButton) updateDisplayFromKey(display, display.value, key);
+				newOutput = Calculator.calc(display.value);
+				break;
+		}
+	} else {
+		// May be movement, delete, backspace, etc
+		newOutput = Calculator.calc(display.value);
+		updateDisplay = false;
 	}
 
-	var text = displayInput.value;
-	var index = getCursorPosition(displayInput);
-	if (index === -1) index = text.length;
-
-	var before = text.substring(0, index);
-	var after = text.substring(index);
-	var newVal = before + key.value + after;
-	displayInput.value = newVal;
-
-	setCursorPosition(false, displayInput, index + 1);
+	setOutput(output, newOutput);
+	if (updateDisplay) setDisplay(display, newDisplay);
 }
 
-function updateOutput(result) {
-	var output = document.querySelector(ui.output);
-	if (result === null) {
-		output.innerHTML = "";
-		output.style.visibility = "hidden";
-		return;
-	}
-	output.style.visibility = "";
-	output.innerHTML = result;
+// Update the display
+function updateDisplayFromKey(display, displayValue, key) {
+	var index = getCursorPosition(display);
+	if (index === -1) index = displayValue.length;
+
+	var before = displayValue.substring(0, index);
+	var after = displayValue.substring(index);
+	var newVal = before + key.value + after;
+	display.value = newVal;
+
+	setCursorPosition(false, display, index + 1);
+}
+
+function initOutput() {
+	setOutput(document.querySelector(ui.output), "");
+}
+
+// Set the output (to the result)
+function setOutput(output, value) {
+	output.innerHTML = value;
+	output.style.visibility = value ? "" : "hidden";
+}
+
+// Set the display (to the result)
+function setDisplay(display, value) {
+	if (isNaN(value)) value = "";
+	display.value = value;
+	setCursorPosition(false, display, value.toString().length);
 }
 
 function startupFocus() {
@@ -1282,9 +1297,7 @@ function toString(result) {
 function calc(input) {
 	var result = void 0;
 	try {
-		result = eval(input.map(function (a) {
-			return a.value;
-		}).join(""));
+		result = eval(input);
 	} catch (e) {
 		result = Invalid;
 	}

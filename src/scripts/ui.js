@@ -1,4 +1,5 @@
 import * as Keys from "./keys.js";
+import * as Calculator from "./calculate.js";
 
 // UI bindings
 export const ui = {
@@ -15,10 +16,10 @@ export function detectTouch() {
 
 // Add custom keypress listeners
 export const onKeyPressed = [];
-function keyPress(keyPressed) {
+function keyPress(keyPressed, isButton) {
 	onKeyPressed.forEach(function (handler) {
 		if (typeof (handler) === "function")
-			handler(keyPressed);
+			handler(keyPressed, isButton);
 	});
 }
 
@@ -37,7 +38,10 @@ export function bindUIOnReady() {
 		row.forEach(function (key) {
 			// Add the background color on the TD instead, the button is slightly smaller.
 			const td = document.createElement("td");
-			td.style.backgroundColor = key.colors.button;
+			td.style.backgroundColor = key.colors.canvas;
+			td.style.color = key.colors.button;
+			//td.style.boxShadow = `0 0 15px 3px ${key.colors.button} inset`;
+
 			const button = document.createElement("button");
 
 			button.innerHTML = key.value;
@@ -51,7 +55,7 @@ export function bindUIOnReady() {
 			td.onclick = function (e) {
 				e.preventDefault();
 				e.stopImmediatePropagation();
-				keyPress(key);
+				keyPress(key, true);
 			}
 
 			td.appendChild(button);
@@ -67,9 +71,12 @@ export function bindUIOnReady() {
 	const displayInput = document.querySelector(ui.displayInput);
 	displayInput.addEventListener("keyup", function (e) {
 		const keyPressed = flat[e.key.toLowerCase()] || null;
-		keyPress(keyPressed);
-
-		console.log(e.key);
+		console.log(e.key, keyPressed);
+		if (keyPressed) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+		}
+		keyPress(keyPressed, false);
 	});
 }
 
@@ -114,38 +121,74 @@ function setCursorPosition(focus, input, pos) {
 	setSelectionRange(focus, input, pos, pos);
 }
 
-// Update the display
-export function updateDisplay(key) {
-	const displayInput = document.querySelector(ui.displayInput);
+export function update(key, isButton) {
+	const display = document.querySelector(ui.displayInput);
+	const output = document.querySelector(ui.output);
 
-	// If no key, clear the displays.
-	if (!key) {
-		displayInput.value = "";
-		return;
+	let updateDisplay = false;
+	let newOutput, newDisplay;
+
+	if (key) {
+		switch (key.type) {
+			case Keys.KEY_TYPE.clear:
+				updateDisplay = true;
+				newDisplay = "";
+				newOutput = "";
+				break;
+			case Keys.KEY_TYPE.equals:
+				updateDisplay = true;
+				newDisplay = Calculator.calc(display.value);
+				newOutput = newDisplay;
+				break;
+			default:
+				// Add the key to the display
+				if (isButton)
+					updateDisplayFromKey(display, display.value, key);
+				newOutput = Calculator.calc(display.value);
+				break;
+		}
+	}
+	else {
+		// May be movement, delete, backspace, etc
+		newOutput = Calculator.calc(display.value);
+		updateDisplay = false;
 	}
 
-	let text = displayInput.value;
-	let index = getCursorPosition(displayInput);
-	if (index === -1)
-		index = text.length;
-
-	const before = text.substring(0, index);
-	const after = text.substring(index);
-	const newVal = before + key.value + after;
-	displayInput.value = newVal;
-
-	setCursorPosition(false, displayInput, index + 1);
+	setOutput(output, newOutput);
+	if (updateDisplay)
+		setDisplay(display, newDisplay);
 }
 
-export function updateOutput(result) {
-	const output = document.querySelector(ui.output);
-	if (result === null) {
-		output.innerHTML = "";
-		output.style.visibility = "hidden";
-		return;
-	}
-	output.style.visibility = "";
-	output.innerHTML = result;
+// Update the display
+function updateDisplayFromKey(display, displayValue, key) {
+	let index = getCursorPosition(display);
+	if (index === -1)
+		index = displayValue.length;
+
+	const before = displayValue.substring(0, index);
+	const after = displayValue.substring(index);
+	const newVal = before + key.value + after;
+	display.value = newVal;
+
+	setCursorPosition(false, display, index + 1);
+}
+
+export function initOutput() {
+	setOutput(document.querySelector(ui.output), "");
+}
+
+// Set the output (to the result)
+function setOutput(output, value) {
+	output.innerHTML = value;
+	output.style.visibility = value ? "" : "hidden";
+}
+
+// Set the display (to the result)
+function setDisplay(display, value) {
+	if (isNaN(value))
+		value = "";
+	display.value = value;
+	setCursorPosition(false, display, value.toString().length);
 }
 
 export function startupFocus() {

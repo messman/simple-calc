@@ -13,7 +13,7 @@ function toString(result) {
 export function calc(input) {
 	let result;
 	try {
-		result = eval(input.map(function (a) { return a.value }).join(""));
+		result = eval(input);
 	}
 	catch (e) {
 		result = Invalid;
