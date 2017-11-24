@@ -954,14 +954,16 @@ function bindUIOnReady() {
 	});
 
 	var displayInput = document.querySelector(ui.displayInput);
-	displayInput.addEventListener("keyup", function (e) {
+	displayInput.addEventListener("keypress", function (e) {
 		var keyPressed = flat[e.key.toLowerCase()] || null;
 		console.log(e.key, keyPressed);
-		if (keyPressed) {
+		if (!keyPressed) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 		}
-		keyPress(keyPressed, false);
+		setTimeout(function () {
+			keyPress(keyPressed, false);
+		}, 10);
 	});
 }
 
@@ -1025,6 +1027,7 @@ function update(key, isButton) {
 			default:
 				// Add the key to the display
 				if (isButton) updateDisplayFromKey(display, display.value, key);
+				console.log(display.value);
 				newOutput = Calculator.calc(display.value);
 				break;
 		}
@@ -1103,12 +1106,21 @@ var ringRadius = largeRingRadius;
 var canvas = null;
 var canvasWidth = 0;
 var canvasHeight = 0;
-function resize() {
-	canvasWidth = window.innerWidth;
-	canvas.width = canvasWidth;
-	canvasHeight = window.innerHeight;
-	canvas.height = canvasHeight;
+var devicePixelRatio = window.devicePixelRatio || 1;
 
+function resize() {
+	var ctx = canvas.getContext("2d");
+	var backingStoreRatio = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
+	var ratio = devicePixelRatio / backingStoreRatio;
+
+	canvasWidth = window.innerWidth;
+	canvasHeight = window.innerHeight;
+	canvas.width = canvasWidth * ratio;
+	canvas.height = canvasHeight * ratio;
+	canvas.style.width = canvasWidth + "px";
+	canvas.style.height = canvasHeight + "px";
+
+	ctx.scale(ratio, ratio);
 	ringRadius = canvasWidth < 500 ? smallRingRadius : largeRingRadius;
 };
 window.onresize = resize;

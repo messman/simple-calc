@@ -69,14 +69,16 @@ export function bindUIOnReady() {
 	});
 
 	const displayInput = document.querySelector(ui.displayInput);
-	displayInput.addEventListener("keyup", function (e) {
+	displayInput.addEventListener("keypress", function (e) {
 		const keyPressed = flat[e.key.toLowerCase()] || null;
 		console.log(e.key, keyPressed);
-		if (keyPressed) {
+		if (!keyPressed) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 		}
-		keyPress(keyPressed, false);
+		setTimeout(function () {
+			keyPress(keyPressed, false);
+		}, 10);
 	});
 }
 
@@ -144,6 +146,7 @@ export function update(key, isButton) {
 				// Add the key to the display
 				if (isButton)
 					updateDisplayFromKey(display, display.value, key);
+				console.log(display.value);
 				newOutput = Calculator.calc(display.value);
 				break;
 		}

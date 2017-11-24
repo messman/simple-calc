@@ -15,12 +15,25 @@ let ringRadius = largeRingRadius;
 let canvas = null;
 let canvasWidth = 0;
 let canvasHeight = 0;
-function resize() {
-	canvasWidth = window.innerWidth;
-	canvas.width = canvasWidth;
-	canvasHeight = window.innerHeight;
-	canvas.height = canvasHeight;
+const devicePixelRatio = window.devicePixelRatio || 1;
 
+function resize() {
+	const ctx = canvas.getContext("2d");
+	const backingStoreRatio = ctx.webkitBackingStorePixelRatio ||
+		ctx.mozBackingStorePixelRatio ||
+		ctx.msBackingStorePixelRatio ||
+		ctx.oBackingStorePixelRatio ||
+		ctx.backingStorePixelRatio || 1;
+	const ratio = devicePixelRatio / backingStoreRatio;
+
+	canvasWidth = window.innerWidth;
+	canvasHeight = window.innerHeight;
+	canvas.width = canvasWidth * ratio;
+	canvas.height = canvasHeight * ratio;
+	canvas.style.width = canvasWidth + "px";
+	canvas.style.height = canvasHeight + "px";
+
+	ctx.scale(ratio, ratio);
 	ringRadius = (canvasWidth < 500) ? smallRingRadius : largeRingRadius;
 };
 window.onresize = resize;
