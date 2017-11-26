@@ -62,7 +62,9 @@ export function bindUIOnReady() {
 			tr.appendChild(td);
 
 			// Also add to the lookup table for keypress
-			flat[key.keyName] = key;
+			key.keyNames.forEach(function (name) {
+				flat[name.toString().toLowerCase()] = key;
+			});
 		});
 
 		table.appendChild(tr);
@@ -71,14 +73,17 @@ export function bindUIOnReady() {
 	const displayInput = document.querySelector(ui.displayInput);
 	displayInput.addEventListener("keypress", function (e) {
 		const keyPressed = flat[e.key.toLowerCase()] || null;
-		console.log(e.key, keyPressed);
-		if (!keyPressed) {
-			e.preventDefault();
-			e.stopImmediatePropagation();
-		}
 		setTimeout(function () {
 			keyPress(keyPressed, false);
 		}, 10);
+		if (!keyPressed || keyPressed.type === Keys.KEY_TYPE.clear || keyPressed.type === Keys.KEY_TYPE.equals) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+		}
+	});
+
+	displayInput.addEventListener("input", function (e) {
+		keyPress(null, false);
 	});
 }
 
@@ -146,7 +151,6 @@ export function update(key, isButton) {
 				// Add the key to the display
 				if (isButton)
 					updateDisplayFromKey(display, display.value, key);
-				console.log(display.value);
 				newOutput = Calculator.calc(display.value);
 				break;
 		}

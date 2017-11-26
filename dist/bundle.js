@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -202,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(6);
+var	fixUrls = __webpack_require__(5);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -524,84 +524,22 @@ function updateLink (link, options, obj) {
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-// keys.js
-// Data on individual keys and colors
+__webpack_require__(3);
 
-// Type of key (for maths, later?)
-var KEY_TYPE = exports.KEY_TYPE = {
-	number: 0,
-	mark: 1,
-	parens: 2,
-	operator: 3,
-	clear: 4,
-	equals: 5
+__webpack_require__(6);
 
-	// Borrow TypeScript's enum.x = 1, enum[1] = x
-};var keytypekeys = Object.keys(KEY_TYPE);
-keytypekeys.forEach(function (keytype) {
-	KEY_TYPE[KEY_TYPE[keytype]] = keytype;
-});
+__webpack_require__(8);
 
-// Create the three colors based on the percent of the h-range of HSL
-function pastelRange(percent) {
-	// Pastel: HSL
-	var h = (360 * percent).toFixed(1);
-	return {
-		canvas: "hsla(" + h + ", 70%, 65%, 1)",
-		button: "hsla(" + h + ", 70%, 90%, 1)"
-	};
-};
-
-var keys = exports.keys = [
-// Top Row
-[["C", KEY_TYPE.clear, "c"], ["(", KEY_TYPE.parens], [")", KEY_TYPE.parens], ["=", KEY_TYPE.equals, "Enter"]], [[7, KEY_TYPE.number], [8, KEY_TYPE.number], [9, KEY_TYPE.number], ["/", KEY_TYPE.operator]], [[4, KEY_TYPE.number], [5, KEY_TYPE.number], [6, KEY_TYPE.number], ["*", KEY_TYPE.operator]], [[1, KEY_TYPE.number], [2, KEY_TYPE.number], [3, KEY_TYPE.number], ["-", KEY_TYPE.operator]], [[0, KEY_TYPE.number, null, 2], // Double-width
-[".", KEY_TYPE.mark], ["+", KEY_TYPE.operator]]];
-
-var total = 0;
-keys.forEach(function (row) {
-	total += row.length;
-});
-var index = 0;
-keys.forEach(function (row) {
-	for (var i = 0; i < row.length; i++) {
-		index++;
-		var key = row[i];
-		row[i] = {
-			value: key[0],
-			type: key[1],
-			keyName: key[2] || key[0],
-			colors: pastelRange(index / total),
-			size: key[3] || 1
-		};
-	}
-});
+__webpack_require__(10);
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-__webpack_require__(4);
-
-__webpack_require__(7);
-
-__webpack_require__(9);
-
-__webpack_require__(11);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(5);
+var content = __webpack_require__(4);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -626,7 +564,7 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -640,7 +578,7 @@ exports.push([module.i, "html {\n\tbox-sizing: border-box;\n\tfont-family: \"Ari
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 
@@ -735,13 +673,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(7);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -766,7 +704,7 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -780,13 +718,13 @@ exports.push([module.i, "/* The overall calculator body */\n.calc {\n\tposition:
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(10);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -811,7 +749,7 @@ if(false) {
 }
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(undefined);
@@ -825,17 +763,17 @@ exports.push([module.i, ".ticker {\n\twidth: 90%;\n\tmargin: auto;\n\tbackground
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ui = __webpack_require__(12);
+var _ui = __webpack_require__(11);
 
 var UI = _interopRequireWildcard(_ui);
 
-var _draw = __webpack_require__(13);
+var _draw = __webpack_require__(14);
 
 var Draw = _interopRequireWildcard(_draw);
 
@@ -862,7 +800,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -878,11 +816,11 @@ exports.update = update;
 exports.initOutput = initOutput;
 exports.startupFocus = startupFocus;
 
-var _keys = __webpack_require__(2);
+var _keys = __webpack_require__(12);
 
 var Keys = _interopRequireWildcard(_keys);
 
-var _calculate = __webpack_require__(14);
+var _calculate = __webpack_require__(13);
 
 var Calculator = _interopRequireWildcard(_calculate);
 
@@ -947,7 +885,9 @@ function bindUIOnReady() {
 			tr.appendChild(td);
 
 			// Also add to the lookup table for keypress
-			flat[key.keyName] = key;
+			key.keyNames.forEach(function (name) {
+				flat[name.toString().toLowerCase()] = key;
+			});
 		});
 
 		table.appendChild(tr);
@@ -956,14 +896,17 @@ function bindUIOnReady() {
 	var displayInput = document.querySelector(ui.displayInput);
 	displayInput.addEventListener("keypress", function (e) {
 		var keyPressed = flat[e.key.toLowerCase()] || null;
-		console.log(e.key, keyPressed);
-		if (!keyPressed) {
-			e.preventDefault();
-			e.stopImmediatePropagation();
-		}
 		setTimeout(function () {
 			keyPress(keyPressed, false);
 		}, 10);
+		if (!keyPressed || keyPressed.type === Keys.KEY_TYPE.clear || keyPressed.type === Keys.KEY_TYPE.equals) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+		}
+	});
+
+	displayInput.addEventListener("input", function (e) {
+		keyPress(null, false);
 	});
 }
 
@@ -1027,7 +970,6 @@ function update(key, isButton) {
 			default:
 				// Add the key to the display
 				if (isButton) updateDisplayFromKey(display, display.value, key);
-				console.log(display.value);
 				newOutput = Calculator.calc(display.value);
 				break;
 		}
@@ -1078,7 +1020,101 @@ function startupFocus() {
 }
 
 /***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+// keys.js
+// Data on individual keys and colors
+
+// Type of key (for maths, later?)
+var KEY_TYPE = exports.KEY_TYPE = {
+	number: 0,
+	mark: 1,
+	parens: 2,
+	operator: 3,
+	clear: 4,
+	equals: 5
+
+	// Borrow TypeScript's enum.x = 1, enum[1] = x
+};var keytypekeys = Object.keys(KEY_TYPE);
+keytypekeys.forEach(function (keytype) {
+	KEY_TYPE[KEY_TYPE[keytype]] = keytype;
+});
+
+// Create the three colors based on the percent of the h-range of HSL
+function pastelRange(percent) {
+	// Pastel: HSL
+	var h = (360 * percent).toFixed(1);
+	return {
+		canvas: "hsla(" + h + ", 70%, 65%, 1)",
+		button: "hsla(" + h + ", 70%, 85%, 1)"
+	};
+};
+
+var keys = exports.keys = [
+// Top Row
+[["C", KEY_TYPE.clear, ["c"]], ["(", KEY_TYPE.parens], [")", KEY_TYPE.parens], ["=", KEY_TYPE.equals, ["Enter", "="]]], [[7, KEY_TYPE.number], [8, KEY_TYPE.number], [9, KEY_TYPE.number], ["/", KEY_TYPE.operator]], [[4, KEY_TYPE.number], [5, KEY_TYPE.number], [6, KEY_TYPE.number], ["*", KEY_TYPE.operator]], [[1, KEY_TYPE.number], [2, KEY_TYPE.number], [3, KEY_TYPE.number], ["-", KEY_TYPE.operator]], [[0, KEY_TYPE.number, null, 2], // Double-width
+[".", KEY_TYPE.mark], ["+", KEY_TYPE.operator]]];
+
+var total = 0;
+keys.forEach(function (row) {
+	total += row.length;
+});
+var index = 0;
+keys.forEach(function (row) {
+	for (var i = 0; i < row.length; i++) {
+		index++;
+		var key = row[i];
+		row[i] = {
+			value: key[0],
+			type: key[1],
+			keyNames: key[2] || [key[0]],
+			colors: pastelRange(index / total),
+			size: key[3] || 1
+		};
+	}
+});
+
+/***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.calc = calc;
+
+var Invalid = 0 / 0;
+
+var decimalMaxPrecision = 3;
+function toString(result) {
+	var num = parseFloat(result);
+	if (isNaN(num)) return num;
+	var r = Math.pow(10, decimalMaxPrecision);
+	return Math.round(num * r) / r;
+}
+
+function calc(input) {
+	var result = void 0;
+	try {
+		result = eval(input);
+	} catch (e) {
+		result = Invalid;
+	}
+	return toString(result);
+}
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1282,38 +1318,6 @@ function drawSingle(ctx, keyEntry, index, length, middle, newKeyAnimationPercent
 	ctx.textBaseline = "middle";
 	ctx.fillText(value, 0, -ringRadius / 2);
 	ctx.restore();
-}
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.calc = calc;
-
-var Invalid = 0 / 0;
-
-var decimalMaxPrecision = 3;
-function toString(result) {
-	var num = parseFloat(result);
-	if (isNaN(num)) return num;
-	var r = Math.pow(10, decimalMaxPrecision);
-	return Math.round(num * r) / r;
-}
-
-function calc(input) {
-	var result = void 0;
-	try {
-		result = eval(input);
-	} catch (e) {
-		result = Invalid;
-	}
-	return toString(result);
 }
 
 /***/ })

@@ -23,17 +23,17 @@ function pastelRange(percent) {
 	const h = (360 * percent).toFixed(1);
 	return {
 		canvas: `hsla(${h}, 70%, 65%, 1)`,
-		button: `hsla(${h}, 70%, 90%, 1)`,
+		button: `hsla(${h}, 70%, 85%, 1)`,
 	};
 };
 
 export const keys = [
 	// Top Row
 	[
-		["C", KEY_TYPE.clear, "c"],
+		["C", KEY_TYPE.clear, ["c"]],
 		["(", KEY_TYPE.parens],
 		[")", KEY_TYPE.parens],
-		["=", KEY_TYPE.equals, "Enter"]
+		["=", KEY_TYPE.equals, ["Enter", "="]]
 	],
 	[
 		[7, KEY_TYPE.number],
@@ -72,7 +72,7 @@ keys.forEach(function (row) {
 		row[i] = {
 			value: key[0],
 			type: key[1],
-			keyName: key[2] || key[0],
+			keyNames: key[2] || [key[0]],
 			colors: pastelRange(index / total),
 			size: key[3] || 1
 		}
