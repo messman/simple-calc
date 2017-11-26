@@ -177,7 +177,7 @@ function updateDisplayFromKey(display, displayValue, key) {
 	const newVal = before + key.value + after;
 	display.value = newVal;
 
-	setCursorPosition(false, display, index + 1);
+	setCursorPosition(!isTouch, display, index + 1);
 }
 
 export function initOutput() {
@@ -195,7 +195,7 @@ function setDisplay(display, value) {
 	if (isNaN(value))
 		value = "";
 	display.value = value;
-	setCursorPosition(false, display, value.toString().length);
+	setCursorPosition(!isTouch, display, value.toString().length);
 }
 
 export function startupFocus() {

@@ -993,7 +993,7 @@ function updateDisplayFromKey(display, displayValue, key) {
 	var newVal = before + key.value + after;
 	display.value = newVal;
 
-	setCursorPosition(false, display, index + 1);
+	setCursorPosition(!isTouch, display, index + 1);
 }
 
 function initOutput() {
@@ -1010,7 +1010,7 @@ function setOutput(output, value) {
 function setDisplay(display, value) {
 	if (isNaN(value)) value = "";
 	display.value = value;
-	setCursorPosition(false, display, value.toString().length);
+	setCursorPosition(!isTouch, display, value.toString().length);
 }
 
 function startupFocus() {
